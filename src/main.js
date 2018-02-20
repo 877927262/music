@@ -7,7 +7,7 @@ import fastclick from 'fastclick' // 因为移动端默认会有 300ms 的延时
 
 import 'common/stylus/index.styl'
 
-fastclick.attach(document.body) // 这样问题就解决了
+fastclick.attach(document.body) // 这样300ms问题就解决了
 
 Vue.config.productionTip = false
 
