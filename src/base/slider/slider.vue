@@ -1,5 +1,5 @@
 <template>
-  <div class="slider" ref="slider">
+  <div class="slider" ref="slider"> <!-- 这里的 ref 不明白 -->
     <div class="slider-group" ref="sliderGroup">
       <slot>
       </slot>
@@ -10,7 +10,56 @@
 </template>
 
 <script>
-  
+// import BScroll from 'better-scroll'
+import {addClass} from 'common/js/dom'
+export default {
+  props: {
+    // 轮播
+    loop: {
+      type: Boolean,
+      default: true
+    },
+    // 自动轮播
+    autoPlay: {
+      type: Boolean,
+      default: true
+    },
+    // 轮播间隔
+    interval: {
+      type: Number,
+      default: 4000
+    }
+  },
+  mounted () {
+    setTimeout(() => {
+      this._setSliderWidth()
+      this._initSlider()
+    }, 20)
+  },
+  methods: {
+    // 设置 slider 的宽度
+    _setSliderWidth (isResize) {
+      this.children = this.$refs.sliderGroup.children
+      let width = 0
+      let sliderWidth = this.$refs.slider.clientWidth
+      for (let i = 0; i < this.children.length; i++) {
+        let child = this.children[i]
+        addClass(child, 'slider-item')
+
+        child.style.width = sliderWidth + 'px'
+        width += sliderWidth
+      }
+      if (this.loop && !isResize) {
+        width += 2 * sliderWidth
+      }
+      this.$refs.sliderGroup.style.width = width + 'px'
+    },
+    // 初始化 slider
+    _initSlider () {
+
+    }
+  }
+}
 </script>
 
 <style scoped lang="stylus" rel="stylesheet/stylus">

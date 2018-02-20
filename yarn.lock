@@ -972,6 +972,12 @@ bcrypt-pbkdf@^1.0.0:
   dependencies:
     tweetnacl "^0.14.3"
 
+better-scroll@^0.1.15:
+  version "0.1.15"
+  resolved "http://registry.npm.taobao.org/better-scroll/download/better-scroll-0.1.15.tgz#17bd5fc175d2fb422d370163c8ab9e28729b2fc1"
+  dependencies:
+    babel-runtime "^6.0.0"
+
 bfj-node4@^5.2.0:
   version "5.2.1"
   resolved "http://registry.npm.taobao.org/bfj-node4/download/bfj-node4-5.2.1.tgz#3a6aa2730cf6911ba2afb836c2f88f015d718f3f"
