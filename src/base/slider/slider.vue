@@ -38,11 +38,23 @@ export default {
     }
   },
   mounted () {
+    // 确保元素已经挂载上
     setTimeout(() => {
       this._setSliderWidth()
       this._initDots()
       this._initSlider()
+
+      if (this.autoPlay) {
+        this._play()
+      }
     }, 20)
+    window.addEventListener('resize', () => {
+      if (!this.slider) {
+        return
+      }
+      this._setSliderWidth(true)
+      this.slider.refresh()
+    })
   },
   methods: {
     // 设置 slider 的宽度
@@ -74,8 +86,7 @@ export default {
         momentum: false,
         snap: true,
         snapLoop: this.loop,
-        snapSpeed: 400,
-        click: true
+        snapSpeed: 400
       })
 
       this.slider.on('scrollEnd', () => {
@@ -85,7 +96,20 @@ export default {
           pageIndex -= 1
         }
         this.currentPageIndex = pageIndex
+        if (this.autoPlay) {
+          clearTimeout(this.timer)
+          this._play()
+        }
       })
+    },
+    _play () {
+      let pageIndex = this.currentPageIndex + 1
+      if (this.loop) {
+        pageIndex += 1
+      }
+      this.timer = setTimeout(() => {
+        this.slider.goToPage(pageIndex, 0, 400)
+      }, this.interval)
     }
   }
 }
