@@ -1,9 +1,9 @@
 <template lang="html">
   <div class="recommend">
     <div class="recommend-content">
-      <div class="slider-wrapper">
+      <div v-if="recommends.length" class="slider-wrapper">
           <Slider>
-            <div v-for="item in recommends">
+            <div v-for="item in recommends" :key="item.linkUrl">
               <a :href="item.linkUrl">
                 <img :src="item.picUrl" alt="图片">
               </a>
@@ -34,6 +34,7 @@ export default {
     this._getRecommend()
   },
   methods: {
+    // 获取轮播图的数据
     _getRecommend () {
       getRecommend().then((res) => {
         if (res.code === ERR_OK) {

@@ -10,7 +10,7 @@
 </template>
 
 <script>
-// import BScroll from 'better-scroll'
+import BScroll from 'better-scroll'
 import {addClass} from 'common/js/dom'
 export default {
   props: {
@@ -56,7 +56,15 @@ export default {
     },
     // 初始化 slider
     _initSlider () {
-
+      this.slider = new BScroll(this.$refs.slider, {
+        scrollX: true,
+        scrollY: false,
+        momentum: false,
+        snap: true,
+        snapLoop: this.loop,
+        snapSpeed: 400,
+        click: true
+      })
     }
   }
 }
