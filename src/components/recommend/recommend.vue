@@ -1,12 +1,12 @@
 <template lang="html">
   <div class="recommend">
-    <scroll class="recommend-content" :data="discList">
+    <scroll ref="scroll" class="recommend-content" :data="discList">
       <div>
         <div v-if="recommends.length" class="slider-wrapper">
           <Slider>
             <div v-for="item in recommends" :key="item.linkUrl">
               <a :href="item.linkUrl">
-                <img :src="item.picUrl" alt="图片">
+                <img @load="loadImage" :src="item.picUrl" alt="图片">
               </a>
             </div>
           </Slider>
@@ -63,6 +63,13 @@
             this.discList = res.data.list
           }
         })
+      },
+      loadImage() {
+        // 让代码只执行一次
+        if (!this.checkLoaded) {
+          this.$refs.scroll.refresh()
+          this.checkLoaded = true
+        }
       }
     },
     components: {
