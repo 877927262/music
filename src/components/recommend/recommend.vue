@@ -6,7 +6,8 @@
           <Slider>
             <div v-for="item in recommends" :key="item.linkUrl">
               <a :href="item.linkUrl">
-                <img @load="loadImage" :src="item.picUrl" alt="图片">
+                <!--这里的  needsclick 有特殊含义，因为这里的点击和 fastclick   起了冲突，所以需要使用 needsclick 这个类来支持点击-->
+                <img class="needsclick" @load="loadImage" :src="item.picUrl" alt="图片">
               </a>
             </div>
           </Slider>
@@ -17,7 +18,7 @@
         <ul>
           <li v-for="item in discList" class="item" :key="item.dissid">
             <div class="icon">
-              <img width="60" height="60" :src="item.imgurl">
+              <img width="60" height="60" v-lazy="item.imgurl">
             </div>
             <div class="text">
               <h2 class="name" v-html="item.creator.name"></h2>
