@@ -22,8 +22,13 @@ module.exports = {
   // add your custom rules here
   rules: {
     // allow async-await
+    'arrow-parens': 0,
     'generator-star-spacing': 'off',
     // allow debugger during development
-    'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off'
+    'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
+    'eol-last': 0,
+    'indent': 0,  // 忽略缩进
+    'space-before-function-paren': 0 //忽略函数小括号的空格
+
   }
 }
