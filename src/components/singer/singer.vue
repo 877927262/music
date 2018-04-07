@@ -56,7 +56,22 @@
             name: item.Fsinger_name
           }))
         })
-        console.log(map)
+        // console.log(map)
+        //  为了处理为有序列表，我们需要处理 map
+        let hot = []
+        let ret = []
+        for (let key in map) {
+          let val = map[key]
+          if (val.title.match(/[a-zA-z]/)) {
+            ret.push(val)
+          } else if (val.title === HOT_NAME) {
+            hot.push(val)
+          }
+        }
+        ret.sort((a, b) => {
+          return a.title.charCodeAt(0) - b.title.charCodeAt(0)
+        })
+        return hot.concat(ret)
       }
     }
   }
