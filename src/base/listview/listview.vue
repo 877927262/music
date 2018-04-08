@@ -76,6 +76,17 @@
         this.scrollY = pos.y
       },
       _scrollTo(index) {
+        // 点击字母容器的最上方和最下方不改变高亮
+        if (!index && index !== 0) {
+          return
+        }
+        // 滑动到最顶部和底部的问题
+        if (index < 0) {
+          index = 0
+        } else if (index > this.listHeight.length - 2) {
+          index = this.listHeight.length - 2
+        }
+        this.scrollY = -this.listHeight[index] // 这行代码的功能是为了解决点击右侧字母滚动页面并且对应的字母高亮
         this.$refs.listview.scrollToElement(this.$refs.listGroup[index], 0)
       },
       _calculateHeight() {
